@@ -41,13 +41,22 @@ public_users.get('/author/:author',function (req, res) {
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    const title = req.params.title
+    let new_result = title.split('+').join(' ');
+    const new_values = Object.values(books);
+    for(let i = 1; i <= 10; i++){
+        if(books[i].title === new_result){
+            res.send(new_values[i-1]);
+        }
+      }
+
 });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const isbn = req.params.isbn;
+  res.send(books[isbn].reviews);
 });
 
 module.exports.general = public_users;
