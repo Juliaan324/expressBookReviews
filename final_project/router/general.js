@@ -26,7 +26,16 @@ public_users.get('/isbn/:isbn',function (req, res) {
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const author = req.params.author; //so we are setting variable to what im sending in the curl command
+  let result = author.split('+').join(' ');
+  //i'm then going to have some logic based on our new variable to send data back
+  const values = Object.values(books);
+  for(let i = 1; i <= 10; i++){
+    if(books[i].author === result){
+        res.send(values[i-1]);
+    }
+  }
+   
 });
 
 // Get all books based on title
